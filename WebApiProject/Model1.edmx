@@ -1,0 +1,903 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cars">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="make" Type="nvarchar" MaxLength="50" />
+          <Property Name="model_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="model_trim" Type="nvarchar" MaxLength="128" />
+          <Property Name="model_year" Type="nvarchar" MaxLength="10" />
+          <Property Name="body_style" Type="nvarchar" MaxLength="50" />
+          <Property Name="engine_position" Type="nvarchar" MaxLength="50" />
+          <Property Name="engine_cc" Type="nvarchar" MaxLength="50" />
+          <Property Name="engine_num_cyl" Type="nvarchar" MaxLength="50" />
+          <Property Name="engine_type" Type="nvarchar" MaxLength="50" />
+          <Property Name="engine_valves_per_cyl" Type="nvarchar" MaxLength="50" />
+          <Property Name="engine_power_ps" Type="nvarchar" MaxLength="50" />
+          <Property Name="engine_power_rpm" Type="nvarchar" MaxLength="50" />
+          <Property Name="engine_torque_nm" Type="nvarchar" MaxLength="50" />
+          <Property Name="engine_torque_rpm" Type="nvarchar" MaxLength="50" />
+          <Property Name="engine_bore_mm" Type="nvarchar" MaxLength="50" />
+          <Property Name="engine_stroke_mm" Type="nvarchar" MaxLength="50" />
+          <Property Name="engine_compression" Type="nvarchar" MaxLength="50" />
+          <Property Name="engine_fuel" Type="nvarchar" MaxLength="50" />
+          <Property Name="top_speed_kph" Type="nvarchar" MaxLength="50" />
+          <Property Name="zero_to_100_kph" Type="nvarchar" MaxLength="50" />
+          <Property Name="drive_type" Type="nvarchar" MaxLength="50" />
+          <Property Name="transmission_type" Type="nvarchar" MaxLength="50" />
+          <Property Name="seats" Type="nvarchar" MaxLength="50" />
+          <Property Name="doors" Type="nvarchar" MaxLength="50" />
+          <Property Name="weight_kg" Type="nvarchar" MaxLength="50" />
+          <Property Name="length_mm" Type="nvarchar" MaxLength="50" />
+          <Property Name="width_mm" Type="nvarchar" MaxLength="50" />
+          <Property Name="height_mm" Type="nvarchar" MaxLength="50" />
+          <Property Name="wheelbase" Type="nvarchar" MaxLength="50" />
+          <Property Name="lkm_hwy" Type="nvarchar" MaxLength="50" />
+          <Property Name="lkm_mixed" Type="nvarchar" MaxLength="50" />
+          <Property Name="lkm_city" Type="nvarchar" MaxLength="50" />
+          <Property Name="fuel_capacity_l" Type="nvarchar" MaxLength="50" />
+          <Property Name="sold_in_us" Type="nvarchar" MaxLength="50" />
+          <Property Name="co2" Type="nvarchar" MaxLength="50" />
+          <Property Name="make_display" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Function Name="GetCarMakes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetCarsByYearAndMakeAndModel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="year" Type="nvarchar" Mode="In" />
+          <Parameter Name="make" Type="nvarchar" Mode="In" />
+          <Parameter Name="model" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="GetCarsForEngineSizeCylinders" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="engineSize" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="GetCarsForHorsepowerLessthan300" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetCarsForWeightLessthan2000kg" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetCarsForWeigthLessThan2000kgAndHorsepowerGreaterThan300" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetCarsForYearModelMake" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="year" Type="nvarchar" Mode="In" />
+          <Parameter Name="model" Type="nvarchar" Mode="In" />
+          <Parameter Name="make" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="GetMakesForYear" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="year" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetMidEnginedCars" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetModelsForYearAndMake" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="year" Type="int" Mode="In" />
+          <Parameter Name="make" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="GetModelYears" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetSUVs" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetTrimLevels" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="ModelTrimForYearAndMakeAndModel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="year" Type="int" Mode="In" />
+          <Parameter Name="make" Type="nvarchar" Mode="In" />
+          <Parameter Name="model" Type="nvarchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="Cars" EntityType="Self.Cars" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Car">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="make" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="model_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="model_trim" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="model_year" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="body_style" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="engine_position" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="engine_cc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="engine_num_cyl" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="engine_type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="engine_valves_per_cyl" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="engine_power_ps" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="engine_power_rpm" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="engine_torque_nm" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="engine_torque_rpm" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="engine_bore_mm" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="engine_stroke_mm" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="engine_compression" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="engine_fuel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="top_speed_kph" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="zero_to_100_kph" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="drive_type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="transmission_type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="seats" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="doors" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="weight_kg" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="length_mm" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="width_mm" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="height_mm" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="wheelbase" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="lkm_hwy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="lkm_mixed" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="lkm_city" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fuel_capacity_l" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="sold_in_us" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="co2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="make_display" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="CarFinderEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Cars" EntityType="Self.Car" />
+          <FunctionImport Name="GetCarMakes" ReturnType="Collection(String)" />
+          <FunctionImport Name="GetCarsByYearAndMakeAndModel" ReturnType="Collection(Model.GetCarsByYearAndMakeAndModel_Result)">
+            <Parameter Name="year" Mode="In" Type="String" />
+            <Parameter Name="make" Mode="In" Type="String" />
+            <Parameter Name="model" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetCarsForEngineSizeCylinders" ReturnType="Collection(Model.GetCarsForEngineSizeCylinders_Result)">
+            <Parameter Name="engineSize" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetCarsForHorsepowerLessthan300" ReturnType="Collection(Model.GetCarsForHorsepowerLessthan300_Result)" />
+          <FunctionImport Name="GetCarsForWeightLessthan2000kg" ReturnType="Collection(Model.GetCarsForWeightLessthan2000kg_Result)" />
+          <FunctionImport Name="GetCarsForWeigthLessThan2000kgAndHorsepowerGreaterThan300" ReturnType="Collection(Model.GetCarsForWeigthLessThan2000kgAndHorsepowerGreaterThan300_Result)" />
+          <FunctionImport Name="GetCarsForYearModelMake" ReturnType="Collection(Model.GetCarsForYearModelMake_Result)">
+            <Parameter Name="year" Mode="In" Type="String" />
+            <Parameter Name="model" Mode="In" Type="String" />
+            <Parameter Name="make" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetMakesForYear" ReturnType="Collection(String)">
+            <Parameter Name="year" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetMidEnginedCars" ReturnType="Collection(Model.GetMidEnginedCars_Result)" />
+          <FunctionImport Name="GetModelsForYearAndMake" ReturnType="Collection(String)">
+            <Parameter Name="year" Mode="In" Type="Int32" />
+            <Parameter Name="make" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetModelYears" ReturnType="Collection(String)" />
+          <FunctionImport Name="GetSUVs" ReturnType="Collection(Model.GetSUVs_Result)" />
+          <FunctionImport Name="GetTrimLevels" ReturnType="Collection(String)" />
+          <FunctionImport Name="ModelTrimForYearAndMakeAndModel" ReturnType="Collection(String)">
+            <Parameter Name="year" Mode="In" Type="Int32" />
+            <Parameter Name="make" Mode="In" Type="String" />
+            <Parameter Name="model" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="GetCarsByYearAndMakeAndModel_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="make" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="model_name" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="model_trim" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="model_year" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="body_style" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_position" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_cc" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_num_cyl" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_type" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_valves_per_cyl" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_power_ps" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_power_rpm" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_torque_nm" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_torque_rpm" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_bore_mm" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_stroke_mm" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_compression" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_fuel" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="top_speed_kph" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="zero_to_100_kph" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="drive_type" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="transmission_type" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="seats" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="doors" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="weight_kg" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="length_mm" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="width_mm" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="height_mm" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="wheelbase" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="lkm_hwy" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="lkm_mixed" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="lkm_city" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="fuel_capacity_l" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="sold_in_us" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="co2" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="make_display" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetCarsForEngineSizeCylinders_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="make" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="model_name" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="model_trim" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="model_year" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="body_style" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_position" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_cc" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_num_cyl" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_type" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_valves_per_cyl" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_power_ps" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_power_rpm" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_torque_nm" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_torque_rpm" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_bore_mm" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_stroke_mm" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_compression" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_fuel" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="top_speed_kph" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="zero_to_100_kph" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="drive_type" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="transmission_type" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="seats" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="doors" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="weight_kg" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="length_mm" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="width_mm" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="height_mm" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="wheelbase" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="lkm_hwy" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="lkm_mixed" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="lkm_city" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="fuel_capacity_l" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="sold_in_us" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="co2" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="make_display" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetCarsForHorsepowerLessthan300_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="make" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="model_name" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="model_trim" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="model_year" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="body_style" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_position" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_cc" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_num_cyl" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_type" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_valves_per_cyl" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_power_ps" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_power_rpm" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_torque_nm" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_torque_rpm" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_bore_mm" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_stroke_mm" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_compression" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_fuel" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="top_speed_kph" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="zero_to_100_kph" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="drive_type" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="transmission_type" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="seats" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="doors" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="weight_kg" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="length_mm" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="width_mm" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="height_mm" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="wheelbase" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="lkm_hwy" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="lkm_mixed" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="lkm_city" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="fuel_capacity_l" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="sold_in_us" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="co2" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="make_display" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetCarsForWeightLessthan2000kg_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="make" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="model_name" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="model_trim" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="model_year" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="body_style" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_position" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_cc" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_num_cyl" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_type" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_valves_per_cyl" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_power_ps" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_power_rpm" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_torque_nm" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_torque_rpm" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_bore_mm" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_stroke_mm" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_compression" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_fuel" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="top_speed_kph" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="zero_to_100_kph" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="drive_type" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="transmission_type" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="seats" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="doors" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="weight_kg" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="length_mm" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="width_mm" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="height_mm" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="wheelbase" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="lkm_hwy" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="lkm_mixed" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="lkm_city" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="fuel_capacity_l" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="sold_in_us" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="co2" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="make_display" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetCarsForWeigthLessThan2000kgAndHorsepowerGreaterThan300_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="make" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="model_name" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="model_trim" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="model_year" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="body_style" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_position" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_cc" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_num_cyl" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_type" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_valves_per_cyl" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_power_ps" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_power_rpm" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_torque_nm" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_torque_rpm" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_bore_mm" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_stroke_mm" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_compression" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_fuel" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="top_speed_kph" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="zero_to_100_kph" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="drive_type" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="transmission_type" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="seats" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="doors" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="weight_kg" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="length_mm" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="width_mm" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="height_mm" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="wheelbase" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="lkm_hwy" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="lkm_mixed" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="lkm_city" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="fuel_capacity_l" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="sold_in_us" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="co2" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="make_display" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetCarsForYearModelMake_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="make" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="model_name" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="model_trim" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="model_year" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="body_style" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_position" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_cc" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_num_cyl" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_type" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_valves_per_cyl" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_power_ps" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_power_rpm" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_torque_nm" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_torque_rpm" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_bore_mm" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_stroke_mm" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_compression" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_fuel" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="top_speed_kph" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="zero_to_100_kph" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="drive_type" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="transmission_type" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="seats" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="doors" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="weight_kg" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="length_mm" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="width_mm" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="height_mm" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="wheelbase" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="lkm_hwy" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="lkm_mixed" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="lkm_city" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="fuel_capacity_l" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="sold_in_us" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="co2" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="make_display" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetMidEnginedCars_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="make" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="model_name" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="model_trim" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="model_year" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="body_style" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_position" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_cc" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_num_cyl" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_type" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_valves_per_cyl" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_power_ps" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_power_rpm" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_torque_nm" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_torque_rpm" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_bore_mm" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_stroke_mm" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_compression" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_fuel" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="top_speed_kph" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="zero_to_100_kph" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="drive_type" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="transmission_type" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="seats" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="doors" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="weight_kg" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="length_mm" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="width_mm" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="height_mm" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="wheelbase" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="lkm_hwy" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="lkm_mixed" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="lkm_city" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="fuel_capacity_l" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="sold_in_us" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="co2" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="make_display" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetSUVs_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="make" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="model_name" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="model_trim" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="model_year" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="body_style" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_position" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_cc" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_num_cyl" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_type" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_valves_per_cyl" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_power_ps" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_power_rpm" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_torque_nm" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_torque_rpm" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_bore_mm" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_stroke_mm" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_compression" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="engine_fuel" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="top_speed_kph" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="zero_to_100_kph" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="drive_type" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="transmission_type" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="seats" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="doors" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="weight_kg" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="length_mm" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="width_mm" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="height_mm" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="wheelbase" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="lkm_hwy" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="lkm_mixed" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="lkm_city" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="fuel_capacity_l" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="sold_in_us" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="co2" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="make_display" Nullable="true" MaxLength="50" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="CarFinderEntities">
+          <EntitySetMapping Name="Cars">
+            <EntityTypeMapping TypeName="Model.Car">
+              <MappingFragment StoreEntitySet="Cars">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="make" ColumnName="make" />
+                <ScalarProperty Name="model_name" ColumnName="model_name" />
+                <ScalarProperty Name="model_trim" ColumnName="model_trim" />
+                <ScalarProperty Name="model_year" ColumnName="model_year" />
+                <ScalarProperty Name="body_style" ColumnName="body_style" />
+                <ScalarProperty Name="engine_position" ColumnName="engine_position" />
+                <ScalarProperty Name="engine_cc" ColumnName="engine_cc" />
+                <ScalarProperty Name="engine_num_cyl" ColumnName="engine_num_cyl" />
+                <ScalarProperty Name="engine_type" ColumnName="engine_type" />
+                <ScalarProperty Name="engine_valves_per_cyl" ColumnName="engine_valves_per_cyl" />
+                <ScalarProperty Name="engine_power_ps" ColumnName="engine_power_ps" />
+                <ScalarProperty Name="engine_power_rpm" ColumnName="engine_power_rpm" />
+                <ScalarProperty Name="engine_torque_nm" ColumnName="engine_torque_nm" />
+                <ScalarProperty Name="engine_torque_rpm" ColumnName="engine_torque_rpm" />
+                <ScalarProperty Name="engine_bore_mm" ColumnName="engine_bore_mm" />
+                <ScalarProperty Name="engine_stroke_mm" ColumnName="engine_stroke_mm" />
+                <ScalarProperty Name="engine_compression" ColumnName="engine_compression" />
+                <ScalarProperty Name="engine_fuel" ColumnName="engine_fuel" />
+                <ScalarProperty Name="top_speed_kph" ColumnName="top_speed_kph" />
+                <ScalarProperty Name="zero_to_100_kph" ColumnName="zero_to_100_kph" />
+                <ScalarProperty Name="drive_type" ColumnName="drive_type" />
+                <ScalarProperty Name="transmission_type" ColumnName="transmission_type" />
+                <ScalarProperty Name="seats" ColumnName="seats" />
+                <ScalarProperty Name="doors" ColumnName="doors" />
+                <ScalarProperty Name="weight_kg" ColumnName="weight_kg" />
+                <ScalarProperty Name="length_mm" ColumnName="length_mm" />
+                <ScalarProperty Name="width_mm" ColumnName="width_mm" />
+                <ScalarProperty Name="height_mm" ColumnName="height_mm" />
+                <ScalarProperty Name="wheelbase" ColumnName="wheelbase" />
+                <ScalarProperty Name="lkm_hwy" ColumnName="lkm_hwy" />
+                <ScalarProperty Name="lkm_mixed" ColumnName="lkm_mixed" />
+                <ScalarProperty Name="lkm_city" ColumnName="lkm_city" />
+                <ScalarProperty Name="fuel_capacity_l" ColumnName="fuel_capacity_l" />
+                <ScalarProperty Name="sold_in_us" ColumnName="sold_in_us" />
+                <ScalarProperty Name="co2" ColumnName="co2" />
+                <ScalarProperty Name="make_display" ColumnName="make_display" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetCarMakes" FunctionName="Model.Store.GetCarMakes" />
+          <FunctionImportMapping FunctionImportName="GetCarsByYearAndMakeAndModel" FunctionName="Model.Store.GetCarsByYearAndMakeAndModel">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.GetCarsByYearAndMakeAndModel_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="make" ColumnName="make" />
+                <ScalarProperty Name="model_name" ColumnName="model_name" />
+                <ScalarProperty Name="model_trim" ColumnName="model_trim" />
+                <ScalarProperty Name="model_year" ColumnName="model_year" />
+                <ScalarProperty Name="body_style" ColumnName="body_style" />
+                <ScalarProperty Name="engine_position" ColumnName="engine_position" />
+                <ScalarProperty Name="engine_cc" ColumnName="engine_cc" />
+                <ScalarProperty Name="engine_num_cyl" ColumnName="engine_num_cyl" />
+                <ScalarProperty Name="engine_type" ColumnName="engine_type" />
+                <ScalarProperty Name="engine_valves_per_cyl" ColumnName="engine_valves_per_cyl" />
+                <ScalarProperty Name="engine_power_ps" ColumnName="engine_power_ps" />
+                <ScalarProperty Name="engine_power_rpm" ColumnName="engine_power_rpm" />
+                <ScalarProperty Name="engine_torque_nm" ColumnName="engine_torque_nm" />
+                <ScalarProperty Name="engine_torque_rpm" ColumnName="engine_torque_rpm" />
+                <ScalarProperty Name="engine_bore_mm" ColumnName="engine_bore_mm" />
+                <ScalarProperty Name="engine_stroke_mm" ColumnName="engine_stroke_mm" />
+                <ScalarProperty Name="engine_compression" ColumnName="engine_compression" />
+                <ScalarProperty Name="engine_fuel" ColumnName="engine_fuel" />
+                <ScalarProperty Name="top_speed_kph" ColumnName="top_speed_kph" />
+                <ScalarProperty Name="zero_to_100_kph" ColumnName="zero_to_100_kph" />
+                <ScalarProperty Name="drive_type" ColumnName="drive_type" />
+                <ScalarProperty Name="transmission_type" ColumnName="transmission_type" />
+                <ScalarProperty Name="seats" ColumnName="seats" />
+                <ScalarProperty Name="doors" ColumnName="doors" />
+                <ScalarProperty Name="weight_kg" ColumnName="weight_kg" />
+                <ScalarProperty Name="length_mm" ColumnName="length_mm" />
+                <ScalarProperty Name="width_mm" ColumnName="width_mm" />
+                <ScalarProperty Name="height_mm" ColumnName="height_mm" />
+                <ScalarProperty Name="wheelbase" ColumnName="wheelbase" />
+                <ScalarProperty Name="lkm_hwy" ColumnName="lkm_hwy" />
+                <ScalarProperty Name="lkm_mixed" ColumnName="lkm_mixed" />
+                <ScalarProperty Name="lkm_city" ColumnName="lkm_city" />
+                <ScalarProperty Name="fuel_capacity_l" ColumnName="fuel_capacity_l" />
+                <ScalarProperty Name="sold_in_us" ColumnName="sold_in_us" />
+                <ScalarProperty Name="co2" ColumnName="co2" />
+                <ScalarProperty Name="make_display" ColumnName="make_display" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetCarsForEngineSizeCylinders" FunctionName="Model.Store.GetCarsForEngineSizeCylinders">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.GetCarsForEngineSizeCylinders_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="make" ColumnName="make" />
+                <ScalarProperty Name="model_name" ColumnName="model_name" />
+                <ScalarProperty Name="model_trim" ColumnName="model_trim" />
+                <ScalarProperty Name="model_year" ColumnName="model_year" />
+                <ScalarProperty Name="body_style" ColumnName="body_style" />
+                <ScalarProperty Name="engine_position" ColumnName="engine_position" />
+                <ScalarProperty Name="engine_cc" ColumnName="engine_cc" />
+                <ScalarProperty Name="engine_num_cyl" ColumnName="engine_num_cyl" />
+                <ScalarProperty Name="engine_type" ColumnName="engine_type" />
+                <ScalarProperty Name="engine_valves_per_cyl" ColumnName="engine_valves_per_cyl" />
+                <ScalarProperty Name="engine_power_ps" ColumnName="engine_power_ps" />
+                <ScalarProperty Name="engine_power_rpm" ColumnName="engine_power_rpm" />
+                <ScalarProperty Name="engine_torque_nm" ColumnName="engine_torque_nm" />
+                <ScalarProperty Name="engine_torque_rpm" ColumnName="engine_torque_rpm" />
+                <ScalarProperty Name="engine_bore_mm" ColumnName="engine_bore_mm" />
+                <ScalarProperty Name="engine_stroke_mm" ColumnName="engine_stroke_mm" />
+                <ScalarProperty Name="engine_compression" ColumnName="engine_compression" />
+                <ScalarProperty Name="engine_fuel" ColumnName="engine_fuel" />
+                <ScalarProperty Name="top_speed_kph" ColumnName="top_speed_kph" />
+                <ScalarProperty Name="zero_to_100_kph" ColumnName="zero_to_100_kph" />
+                <ScalarProperty Name="drive_type" ColumnName="drive_type" />
+                <ScalarProperty Name="transmission_type" ColumnName="transmission_type" />
+                <ScalarProperty Name="seats" ColumnName="seats" />
+                <ScalarProperty Name="doors" ColumnName="doors" />
+                <ScalarProperty Name="weight_kg" ColumnName="weight_kg" />
+                <ScalarProperty Name="length_mm" ColumnName="length_mm" />
+                <ScalarProperty Name="width_mm" ColumnName="width_mm" />
+                <ScalarProperty Name="height_mm" ColumnName="height_mm" />
+                <ScalarProperty Name="wheelbase" ColumnName="wheelbase" />
+                <ScalarProperty Name="lkm_hwy" ColumnName="lkm_hwy" />
+                <ScalarProperty Name="lkm_mixed" ColumnName="lkm_mixed" />
+                <ScalarProperty Name="lkm_city" ColumnName="lkm_city" />
+                <ScalarProperty Name="fuel_capacity_l" ColumnName="fuel_capacity_l" />
+                <ScalarProperty Name="sold_in_us" ColumnName="sold_in_us" />
+                <ScalarProperty Name="co2" ColumnName="co2" />
+                <ScalarProperty Name="make_display" ColumnName="make_display" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetCarsForHorsepowerLessthan300" FunctionName="Model.Store.GetCarsForHorsepowerLessthan300">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.GetCarsForHorsepowerLessthan300_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="make" ColumnName="make" />
+                <ScalarProperty Name="model_name" ColumnName="model_name" />
+                <ScalarProperty Name="model_trim" ColumnName="model_trim" />
+                <ScalarProperty Name="model_year" ColumnName="model_year" />
+                <ScalarProperty Name="body_style" ColumnName="body_style" />
+                <ScalarProperty Name="engine_position" ColumnName="engine_position" />
+                <ScalarProperty Name="engine_cc" ColumnName="engine_cc" />
+                <ScalarProperty Name="engine_num_cyl" ColumnName="engine_num_cyl" />
+                <ScalarProperty Name="engine_type" ColumnName="engine_type" />
+                <ScalarProperty Name="engine_valves_per_cyl" ColumnName="engine_valves_per_cyl" />
+                <ScalarProperty Name="engine_power_ps" ColumnName="engine_power_ps" />
+                <ScalarProperty Name="engine_power_rpm" ColumnName="engine_power_rpm" />
+                <ScalarProperty Name="engine_torque_nm" ColumnName="engine_torque_nm" />
+                <ScalarProperty Name="engine_torque_rpm" ColumnName="engine_torque_rpm" />
+                <ScalarProperty Name="engine_bore_mm" ColumnName="engine_bore_mm" />
+                <ScalarProperty Name="engine_stroke_mm" ColumnName="engine_stroke_mm" />
+                <ScalarProperty Name="engine_compression" ColumnName="engine_compression" />
+                <ScalarProperty Name="engine_fuel" ColumnName="engine_fuel" />
+                <ScalarProperty Name="top_speed_kph" ColumnName="top_speed_kph" />
+                <ScalarProperty Name="zero_to_100_kph" ColumnName="zero_to_100_kph" />
+                <ScalarProperty Name="drive_type" ColumnName="drive_type" />
+                <ScalarProperty Name="transmission_type" ColumnName="transmission_type" />
+                <ScalarProperty Name="seats" ColumnName="seats" />
+                <ScalarProperty Name="doors" ColumnName="doors" />
+                <ScalarProperty Name="weight_kg" ColumnName="weight_kg" />
+                <ScalarProperty Name="length_mm" ColumnName="length_mm" />
+                <ScalarProperty Name="width_mm" ColumnName="width_mm" />
+                <ScalarProperty Name="height_mm" ColumnName="height_mm" />
+                <ScalarProperty Name="wheelbase" ColumnName="wheelbase" />
+                <ScalarProperty Name="lkm_hwy" ColumnName="lkm_hwy" />
+                <ScalarProperty Name="lkm_mixed" ColumnName="lkm_mixed" />
+                <ScalarProperty Name="lkm_city" ColumnName="lkm_city" />
+                <ScalarProperty Name="fuel_capacity_l" ColumnName="fuel_capacity_l" />
+                <ScalarProperty Name="sold_in_us" ColumnName="sold_in_us" />
+                <ScalarProperty Name="co2" ColumnName="co2" />
+                <ScalarProperty Name="make_display" ColumnName="make_display" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetCarsForWeightLessthan2000kg" FunctionName="Model.Store.GetCarsForWeightLessthan2000kg">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.GetCarsForWeightLessthan2000kg_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="make" ColumnName="make" />
+                <ScalarProperty Name="model_name" ColumnName="model_name" />
+                <ScalarProperty Name="model_trim" ColumnName="model_trim" />
+                <ScalarProperty Name="model_year" ColumnName="model_year" />
+                <ScalarProperty Name="body_style" ColumnName="body_style" />
+                <ScalarProperty Name="engine_position" ColumnName="engine_position" />
+                <ScalarProperty Name="engine_cc" ColumnName="engine_cc" />
+                <ScalarProperty Name="engine_num_cyl" ColumnName="engine_num_cyl" />
+                <ScalarProperty Name="engine_type" ColumnName="engine_type" />
+                <ScalarProperty Name="engine_valves_per_cyl" ColumnName="engine_valves_per_cyl" />
+                <ScalarProperty Name="engine_power_ps" ColumnName="engine_power_ps" />
+                <ScalarProperty Name="engine_power_rpm" ColumnName="engine_power_rpm" />
+                <ScalarProperty Name="engine_torque_nm" ColumnName="engine_torque_nm" />
+                <ScalarProperty Name="engine_torque_rpm" ColumnName="engine_torque_rpm" />
+                <ScalarProperty Name="engine_bore_mm" ColumnName="engine_bore_mm" />
+                <ScalarProperty Name="engine_stroke_mm" ColumnName="engine_stroke_mm" />
+                <ScalarProperty Name="engine_compression" ColumnName="engine_compression" />
+                <ScalarProperty Name="engine_fuel" ColumnName="engine_fuel" />
+                <ScalarProperty Name="top_speed_kph" ColumnName="top_speed_kph" />
+                <ScalarProperty Name="zero_to_100_kph" ColumnName="zero_to_100_kph" />
+                <ScalarProperty Name="drive_type" ColumnName="drive_type" />
+                <ScalarProperty Name="transmission_type" ColumnName="transmission_type" />
+                <ScalarProperty Name="seats" ColumnName="seats" />
+                <ScalarProperty Name="doors" ColumnName="doors" />
+                <ScalarProperty Name="weight_kg" ColumnName="weight_kg" />
+                <ScalarProperty Name="length_mm" ColumnName="length_mm" />
+                <ScalarProperty Name="width_mm" ColumnName="width_mm" />
+                <ScalarProperty Name="height_mm" ColumnName="height_mm" />
+                <ScalarProperty Name="wheelbase" ColumnName="wheelbase" />
+                <ScalarProperty Name="lkm_hwy" ColumnName="lkm_hwy" />
+                <ScalarProperty Name="lkm_mixed" ColumnName="lkm_mixed" />
+                <ScalarProperty Name="lkm_city" ColumnName="lkm_city" />
+                <ScalarProperty Name="fuel_capacity_l" ColumnName="fuel_capacity_l" />
+                <ScalarProperty Name="sold_in_us" ColumnName="sold_in_us" />
+                <ScalarProperty Name="co2" ColumnName="co2" />
+                <ScalarProperty Name="make_display" ColumnName="make_display" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetCarsForWeigthLessThan2000kgAndHorsepowerGreaterThan300" FunctionName="Model.Store.GetCarsForWeigthLessThan2000kgAndHorsepowerGreaterThan300">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.GetCarsForWeigthLessThan2000kgAndHorsepowerGreaterThan300_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="make" ColumnName="make" />
+                <ScalarProperty Name="model_name" ColumnName="model_name" />
+                <ScalarProperty Name="model_trim" ColumnName="model_trim" />
+                <ScalarProperty Name="model_year" ColumnName="model_year" />
+                <ScalarProperty Name="body_style" ColumnName="body_style" />
+                <ScalarProperty Name="engine_position" ColumnName="engine_position" />
+                <ScalarProperty Name="engine_cc" ColumnName="engine_cc" />
+                <ScalarProperty Name="engine_num_cyl" ColumnName="engine_num_cyl" />
+                <ScalarProperty Name="engine_type" ColumnName="engine_type" />
+                <ScalarProperty Name="engine_valves_per_cyl" ColumnName="engine_valves_per_cyl" />
+                <ScalarProperty Name="engine_power_ps" ColumnName="engine_power_ps" />
+                <ScalarProperty Name="engine_power_rpm" ColumnName="engine_power_rpm" />
+                <ScalarProperty Name="engine_torque_nm" ColumnName="engine_torque_nm" />
+                <ScalarProperty Name="engine_torque_rpm" ColumnName="engine_torque_rpm" />
+                <ScalarProperty Name="engine_bore_mm" ColumnName="engine_bore_mm" />
+                <ScalarProperty Name="engine_stroke_mm" ColumnName="engine_stroke_mm" />
+                <ScalarProperty Name="engine_compression" ColumnName="engine_compression" />
+                <ScalarProperty Name="engine_fuel" ColumnName="engine_fuel" />
+                <ScalarProperty Name="top_speed_kph" ColumnName="top_speed_kph" />
+                <ScalarProperty Name="zero_to_100_kph" ColumnName="zero_to_100_kph" />
+                <ScalarProperty Name="drive_type" ColumnName="drive_type" />
+                <ScalarProperty Name="transmission_type" ColumnName="transmission_type" />
+                <ScalarProperty Name="seats" ColumnName="seats" />
+                <ScalarProperty Name="doors" ColumnName="doors" />
+                <ScalarProperty Name="weight_kg" ColumnName="weight_kg" />
+                <ScalarProperty Name="length_mm" ColumnName="length_mm" />
+                <ScalarProperty Name="width_mm" ColumnName="width_mm" />
+                <ScalarProperty Name="height_mm" ColumnName="height_mm" />
+                <ScalarProperty Name="wheelbase" ColumnName="wheelbase" />
+                <ScalarProperty Name="lkm_hwy" ColumnName="lkm_hwy" />
+                <ScalarProperty Name="lkm_mixed" ColumnName="lkm_mixed" />
+                <ScalarProperty Name="lkm_city" ColumnName="lkm_city" />
+                <ScalarProperty Name="fuel_capacity_l" ColumnName="fuel_capacity_l" />
+                <ScalarProperty Name="sold_in_us" ColumnName="sold_in_us" />
+                <ScalarProperty Name="co2" ColumnName="co2" />
+                <ScalarProperty Name="make_display" ColumnName="make_display" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetCarsForYearModelMake" FunctionName="Model.Store.GetCarsForYearModelMake">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.GetCarsForYearModelMake_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="make" ColumnName="make" />
+                <ScalarProperty Name="model_name" ColumnName="model_name" />
+                <ScalarProperty Name="model_trim" ColumnName="model_trim" />
+                <ScalarProperty Name="model_year" ColumnName="model_year" />
+                <ScalarProperty Name="body_style" ColumnName="body_style" />
+                <ScalarProperty Name="engine_position" ColumnName="engine_position" />
+                <ScalarProperty Name="engine_cc" ColumnName="engine_cc" />
+                <ScalarProperty Name="engine_num_cyl" ColumnName="engine_num_cyl" />
+                <ScalarProperty Name="engine_type" ColumnName="engine_type" />
+                <ScalarProperty Name="engine_valves_per_cyl" ColumnName="engine_valves_per_cyl" />
+                <ScalarProperty Name="engine_power_ps" ColumnName="engine_power_ps" />
+                <ScalarProperty Name="engine_power_rpm" ColumnName="engine_power_rpm" />
+                <ScalarProperty Name="engine_torque_nm" ColumnName="engine_torque_nm" />
+                <ScalarProperty Name="engine_torque_rpm" ColumnName="engine_torque_rpm" />
+                <ScalarProperty Name="engine_bore_mm" ColumnName="engine_bore_mm" />
+                <ScalarProperty Name="engine_stroke_mm" ColumnName="engine_stroke_mm" />
+                <ScalarProperty Name="engine_compression" ColumnName="engine_compression" />
+                <ScalarProperty Name="engine_fuel" ColumnName="engine_fuel" />
+                <ScalarProperty Name="top_speed_kph" ColumnName="top_speed_kph" />
+                <ScalarProperty Name="zero_to_100_kph" ColumnName="zero_to_100_kph" />
+                <ScalarProperty Name="drive_type" ColumnName="drive_type" />
+                <ScalarProperty Name="transmission_type" ColumnName="transmission_type" />
+                <ScalarProperty Name="seats" ColumnName="seats" />
+                <ScalarProperty Name="doors" ColumnName="doors" />
+                <ScalarProperty Name="weight_kg" ColumnName="weight_kg" />
+                <ScalarProperty Name="length_mm" ColumnName="length_mm" />
+                <ScalarProperty Name="width_mm" ColumnName="width_mm" />
+                <ScalarProperty Name="height_mm" ColumnName="height_mm" />
+                <ScalarProperty Name="wheelbase" ColumnName="wheelbase" />
+                <ScalarProperty Name="lkm_hwy" ColumnName="lkm_hwy" />
+                <ScalarProperty Name="lkm_mixed" ColumnName="lkm_mixed" />
+                <ScalarProperty Name="lkm_city" ColumnName="lkm_city" />
+                <ScalarProperty Name="fuel_capacity_l" ColumnName="fuel_capacity_l" />
+                <ScalarProperty Name="sold_in_us" ColumnName="sold_in_us" />
+                <ScalarProperty Name="co2" ColumnName="co2" />
+                <ScalarProperty Name="make_display" ColumnName="make_display" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetMakesForYear" FunctionName="Model.Store.GetMakesForYear" />
+          <FunctionImportMapping FunctionImportName="GetMidEnginedCars" FunctionName="Model.Store.GetMidEnginedCars">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.GetMidEnginedCars_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="make" ColumnName="make" />
+                <ScalarProperty Name="model_name" ColumnName="model_name" />
+                <ScalarProperty Name="model_trim" ColumnName="model_trim" />
+                <ScalarProperty Name="model_year" ColumnName="model_year" />
+                <ScalarProperty Name="body_style" ColumnName="body_style" />
+                <ScalarProperty Name="engine_position" ColumnName="engine_position" />
+                <ScalarProperty Name="engine_cc" ColumnName="engine_cc" />
+                <ScalarProperty Name="engine_num_cyl" ColumnName="engine_num_cyl" />
+                <ScalarProperty Name="engine_type" ColumnName="engine_type" />
+                <ScalarProperty Name="engine_valves_per_cyl" ColumnName="engine_valves_per_cyl" />
+                <ScalarProperty Name="engine_power_ps" ColumnName="engine_power_ps" />
+                <ScalarProperty Name="engine_power_rpm" ColumnName="engine_power_rpm" />
+                <ScalarProperty Name="engine_torque_nm" ColumnName="engine_torque_nm" />
+                <ScalarProperty Name="engine_torque_rpm" ColumnName="engine_torque_rpm" />
+                <ScalarProperty Name="engine_bore_mm" ColumnName="engine_bore_mm" />
+                <ScalarProperty Name="engine_stroke_mm" ColumnName="engine_stroke_mm" />
+                <ScalarProperty Name="engine_compression" ColumnName="engine_compression" />
+                <ScalarProperty Name="engine_fuel" ColumnName="engine_fuel" />
+                <ScalarProperty Name="top_speed_kph" ColumnName="top_speed_kph" />
+                <ScalarProperty Name="zero_to_100_kph" ColumnName="zero_to_100_kph" />
+                <ScalarProperty Name="drive_type" ColumnName="drive_type" />
+                <ScalarProperty Name="transmission_type" ColumnName="transmission_type" />
+                <ScalarProperty Name="seats" ColumnName="seats" />
+                <ScalarProperty Name="doors" ColumnName="doors" />
+                <ScalarProperty Name="weight_kg" ColumnName="weight_kg" />
+                <ScalarProperty Name="length_mm" ColumnName="length_mm" />
+                <ScalarProperty Name="width_mm" ColumnName="width_mm" />
+                <ScalarProperty Name="height_mm" ColumnName="height_mm" />
+                <ScalarProperty Name="wheelbase" ColumnName="wheelbase" />
+                <ScalarProperty Name="lkm_hwy" ColumnName="lkm_hwy" />
+                <ScalarProperty Name="lkm_mixed" ColumnName="lkm_mixed" />
+                <ScalarProperty Name="lkm_city" ColumnName="lkm_city" />
+                <ScalarProperty Name="fuel_capacity_l" ColumnName="fuel_capacity_l" />
+                <ScalarProperty Name="sold_in_us" ColumnName="sold_in_us" />
+                <ScalarProperty Name="co2" ColumnName="co2" />
+                <ScalarProperty Name="make_display" ColumnName="make_display" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetModelsForYearAndMake" FunctionName="Model.Store.GetModelsForYearAndMake" />
+          <FunctionImportMapping FunctionImportName="GetModelYears" FunctionName="Model.Store.GetModelYears" />
+          <FunctionImportMapping FunctionImportName="GetSUVs" FunctionName="Model.Store.GetSUVs">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.GetSUVs_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="make" ColumnName="make" />
+                <ScalarProperty Name="model_name" ColumnName="model_name" />
+                <ScalarProperty Name="model_trim" ColumnName="model_trim" />
+                <ScalarProperty Name="model_year" ColumnName="model_year" />
+                <ScalarProperty Name="body_style" ColumnName="body_style" />
+                <ScalarProperty Name="engine_position" ColumnName="engine_position" />
+                <ScalarProperty Name="engine_cc" ColumnName="engine_cc" />
+                <ScalarProperty Name="engine_num_cyl" ColumnName="engine_num_cyl" />
+                <ScalarProperty Name="engine_type" ColumnName="engine_type" />
+                <ScalarProperty Name="engine_valves_per_cyl" ColumnName="engine_valves_per_cyl" />
+                <ScalarProperty Name="engine_power_ps" ColumnName="engine_power_ps" />
+                <ScalarProperty Name="engine_power_rpm" ColumnName="engine_power_rpm" />
+                <ScalarProperty Name="engine_torque_nm" ColumnName="engine_torque_nm" />
+                <ScalarProperty Name="engine_torque_rpm" ColumnName="engine_torque_rpm" />
+                <ScalarProperty Name="engine_bore_mm" ColumnName="engine_bore_mm" />
+                <ScalarProperty Name="engine_stroke_mm" ColumnName="engine_stroke_mm" />
+                <ScalarProperty Name="engine_compression" ColumnName="engine_compression" />
+                <ScalarProperty Name="engine_fuel" ColumnName="engine_fuel" />
+                <ScalarProperty Name="top_speed_kph" ColumnName="top_speed_kph" />
+                <ScalarProperty Name="zero_to_100_kph" ColumnName="zero_to_100_kph" />
+                <ScalarProperty Name="drive_type" ColumnName="drive_type" />
+                <ScalarProperty Name="transmission_type" ColumnName="transmission_type" />
+                <ScalarProperty Name="seats" ColumnName="seats" />
+                <ScalarProperty Name="doors" ColumnName="doors" />
+                <ScalarProperty Name="weight_kg" ColumnName="weight_kg" />
+                <ScalarProperty Name="length_mm" ColumnName="length_mm" />
+                <ScalarProperty Name="width_mm" ColumnName="width_mm" />
+                <ScalarProperty Name="height_mm" ColumnName="height_mm" />
+                <ScalarProperty Name="wheelbase" ColumnName="wheelbase" />
+                <ScalarProperty Name="lkm_hwy" ColumnName="lkm_hwy" />
+                <ScalarProperty Name="lkm_mixed" ColumnName="lkm_mixed" />
+                <ScalarProperty Name="lkm_city" ColumnName="lkm_city" />
+                <ScalarProperty Name="fuel_capacity_l" ColumnName="fuel_capacity_l" />
+                <ScalarProperty Name="sold_in_us" ColumnName="sold_in_us" />
+                <ScalarProperty Name="co2" ColumnName="co2" />
+                <ScalarProperty Name="make_display" ColumnName="make_display" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetTrimLevels" FunctionName="Model.Store.GetTrimLevels" />
+          <FunctionImportMapping FunctionImportName="ModelTrimForYearAndMakeAndModel" FunctionName="Model.Store.ModelTrimForYearAndMakeAndModel" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
